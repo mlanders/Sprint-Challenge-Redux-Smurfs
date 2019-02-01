@@ -8,6 +8,12 @@ import {
 	DELETE_SMURF_START,
 	DELETE_SMURF_SUCCESS,
 	DELETE_SMURF_FAILURE,
+	EDIT_SMURF_START,
+	EDIT_SMURF_SUCCESS,
+	EDIT_SMURF_FAILURE,
+	UPDATE_SMURF_START,
+	UPDATE_SMURF_SUCCESS,
+	UPDATE_SMURF_FAILURE,
 } from '../actions/';
 
 /*
@@ -15,6 +21,11 @@ import {
  */
 const initialState = {
 	smurfs: [],
+	smurf: {
+		name: '',
+		age: '',
+		height: '',
+	},
 	fetchingSmurfs: false,
 	addingSmurf: false,
 	updatingSmurf: false,
@@ -51,49 +62,99 @@ const reducer = (state = initialState, action) => {
 				...state,
 				smurfs: [...state.smurfs],
 				fetchingSmurfs: false,
-				error: action.payload,
+				error: action.payload.data,
 			};
 		case ADD_SMURF_START:
 			return {
 				...state,
 				smurfs: [...state.smurfs],
-				fetchingSmurfs: true,
+				addingSmurf: true,
+
 				error: '',
 			};
 		case ADD_SMURF_SUCCESS:
 			return {
 				...state,
 				smurfs: action.payload.data,
-				fetchingSmurfs: false,
+				addingSmurf: false,
+
 				error: '',
 			};
 		case ADD_SMURF_FAILURE:
 			return {
 				...state,
 				smurfs: [...state.smurfs],
-				fetchingSmurfs: false,
-				error: action.payload,
+				addingSmurf: false,
+
+				error: action.payload.data,
 			};
 		case DELETE_SMURF_START:
 			return {
 				...state,
 				smurfs: [...state.smurfs],
-				fetchingSmurfs: true,
+				deletingSmurf: true,
+
 				error: '',
 			};
 		case DELETE_SMURF_SUCCESS:
 			return {
 				...state,
 				smurfs: action.payload.data,
-				fetchingSmurfs: false,
+				deletingSmurf: false,
+
 				error: '',
 			};
 		case DELETE_SMURF_FAILURE:
 			return {
 				...state,
 				smurfs: [...state.smurfs],
-				fetchingSmurfs: false,
-				error: action.payload,
+				deletingSmurf: false,
+
+				error: action.payload.data,
+			};
+		case UPDATE_SMURF_START:
+			return {
+				...state,
+				smurfs: [...state.smurfs],
+				updatingSmurf: true,
+
+				error: '',
+			};
+		case UPDATE_SMURF_SUCCESS:
+			return {
+				...state,
+				smurfs: action.payload.data,
+				updatingSmurf: false,
+
+				error: '',
+			};
+		case UPDATE_SMURF_FAILURE:
+			return {
+				...state,
+				smurfs: [...state.smurfs],
+				updatingSmurf: false,
+
+				error: action.payload.data,
+			};
+		case EDIT_SMURF_START:
+			return {
+				...state,
+			};
+		case EDIT_SMURF_SUCCESS:
+			console.log(action.payload);
+
+			return {
+				...state,
+				smurf: {
+					name: action.payload.name,
+					age: action.payload.age,
+					height: action.payload.height,
+				},
+			};
+		case EDIT_SMURF_FAILURE:
+			return {
+				...state,
+				error: action.payload.data,
 			};
 
 		default:

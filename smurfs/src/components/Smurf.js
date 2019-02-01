@@ -8,6 +8,9 @@ function Smurf(props) {
 			<button onClick={e => props.handleDelete(e, props.smurf.id)}>
 				Delete
 			</button>
+			<button onClick={e => props.handleEdit(e, props.smurf.id)}>
+				Edit
+			</button>
 		</iv>
 	);
 }

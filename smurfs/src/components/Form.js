@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import { addSmurf } from '../actions';
 
 class Form extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			name: '',
 			age: '',
 			height: '',
 			id: '',
+			smurf: {
+				name: this.props.smurf.name,
+				age: this.props.age,
+				height: this.props.height,
+			},
 		};
 	}
 
@@ -61,6 +66,11 @@ class Form extends React.Component {
 const mapStateToProps = state => {
 	return {
 		smurfs: state.smurfs,
+		smurf: {
+			name: state.smurf.name,
+			age: state.smurf.age,
+			height: state.smurf.height,
+		},
 	};
 };
 

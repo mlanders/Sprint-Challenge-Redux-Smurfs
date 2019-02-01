@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { getSmurfs, deleteSmurf } from '../actions';
+import { getSmurfs, deleteSmurf, updateSmurf, editSmurf } from '../actions';
 import Smurfs from './Smurfs';
 import Form from './Form';
 
@@ -12,11 +12,35 @@ import Form from './Form';
  `How do I ensure that my component links the state to props?`
  */
 class App extends Component {
+	constructor() {
+		super();
+		this.state = {
+			name: '',
+			age: '',
+			height: '',
+			id: '',
+		};
+	}
+
 	componentDidMount() {
 		this.props.getSmurfs();
 	}
 
 	handleDelete = (e, id) => {
+		e.preventDefault();
+		this.props.deleteSmurf(id);
+	};
+	handleEdit = (e, id) => {
+		e.preventDefault();
+		let selected = this.props.smurfs.find(smurf => smurf.id === id);
+		this.props.editSmurf(selected);
+		// this.setState({
+		// 	name: selected.name,
+		// 	age: selected.age,
+		// 	height: selected.height,
+		// });
+	};
+	handleUpdate = (e, id) => {
 		e.preventDefault();
 		this.props.deleteSmurf(id);
 	};
@@ -31,6 +55,7 @@ class App extends Component {
 					<Smurfs
 						smurfs={this.props.smurfs}
 						handleDelete={this.handleDelete}
+						handleEdit={this.handleEdit}
 					/>
 				)}
 			</div>
@@ -44,5 +69,5 @@ const mapStateToProps = state => {
 };
 export default connect(
 	mapStateToProps,
-	{ getSmurfs, deleteSmurf }
+	{ getSmurfs, deleteSmurf, updateSmurf, editSmurf }
 )(App);

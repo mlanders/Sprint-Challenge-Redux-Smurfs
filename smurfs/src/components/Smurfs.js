@@ -9,6 +9,7 @@ function Smurfs(props) {
 				key={uuidv4()}
 				smurf={smurf}
 				handleDelete={props.handleDelete}
+				handleEdit={props.handleEdit}
 			/>
 		);
 	});
