@@ -8,9 +8,10 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import /* You need some sort of reducer */ './reducers';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  () => {}, // this is the most basic reducer. A function that returns and object. Replace it.
-  applyMiddleware(/* be sure to throw in the proper middlewares here*/)
+	rootReducer,
+	composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 ReactDOM.render(
