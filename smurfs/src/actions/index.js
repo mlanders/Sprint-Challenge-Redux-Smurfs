@@ -70,7 +70,7 @@ export const editSmurf = smurf => dispatch => {
 	// console.log(smurf);
 	dispatch({ type: EDIT_SMURF_START });
 	axios
-		.post(`http://localhost:3333/smurfs/`, smurf)
+		.put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
 		.then(res => {
 			dispatch({ type: EDIT_SMURF_SUCCESS, payload: res });
 		})

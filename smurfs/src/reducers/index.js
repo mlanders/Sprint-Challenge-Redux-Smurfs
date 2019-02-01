@@ -141,14 +141,14 @@ const reducer = (state = initialState, action) => {
 				...state,
 			};
 		case EDIT_SMURF_SUCCESS:
-			console.log(action.payload);
+			console.log(action.payload.data);
 
 			return {
 				...state,
 				smurf: {
-					name: action.payload.name,
-					age: action.payload.age,
-					height: action.payload.height,
+					name: action.payload.data[0].name,
+					age: action.payload.data[0].age,
+					height: action.payload.data[0].height,
 				},
 			};
 		case EDIT_SMURF_FAILURE:
